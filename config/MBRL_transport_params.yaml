@@ -1,0 +1,67 @@
+firefly: #namespace
+    task_and_robot_environment_name: 'MBRL_transport-v2'
+    ros_ws_abspath: "/home/wawa/catkin_meta"
+
+    test_model: 0
+    # 3d_space: 1
+    xy: 1
+    
+    #from handful_trials
+    #MPC
+    per: 1
+    prop_mode: "TSinf"
+    npart: 20
+    ign_var: False
+    opt_mode: "CEM"
+    plan_hor: 5
+    task_hor: 700 #200
+    num_nets: 1 #for ensemble models
+    epsilon: 0.001
+    alpha: 0.25 #0.25
+    epochs: 5 #5
+    max_iters: 3
+    popsize: 50 #50
+    num_elites: 10 #10
+    # model_in: 7  #sin(pitch),cos(pitch),x,y,z 2 actions
+    # model_out: 4  #x,y,z,pitch
+    model_3d_in: 18  #u1x,u1y,u1z,u2x,u2y,u2z,p1x,p1y,p1z,sin(roll),cos(roll),sin(pitch),cos(pitch),sin(yaw),cos(yaw) 3 actions
+    model_3d_out: 12  #u1x,u1y,u1z,u2x,u2y,u2z,p1x,p1y,p1z,roll,pitch,yaw
+
+    #Experiment
+    ntrain_iters: 50 #50
+    nrollouts_per_iter: 5
+    ninit_rollouts: 5
+    nrecord: 0
+    neval: 1
+    route: "cross" #square,figure8_1 square_xy,cross
+    visualization: True
+    log_sample_data: 0 #whether we record states and models for one rollout; should be set to False when doing online learnining
+
+    #PETS
+    load_model_PETS: 1
+
+    #meta learning
+    epoch_m: 50000 # for offline training
+    epoch_m_running: 1000  #for online internal meta training
+    n_way: 4
+    k_spt: 15
+    k_qry: 15
+    task_num: 32
+    meta_lr: 0.001
+    update_lr: 0.001
+    update_step: 5
+    update_step_test: 10
+    load_model_m: 1 #careful it will automatically load previous model from the folder
+    abandon_samples: 0
+    meta_train_iters: 50
+    meta_nrollouts_per_iter: 4 # n way
+    running_total_points: 2000
+
+    #embedding
+    em_embedding: 0
+    VI: 0
+
+
+    
+
+    
