@@ -2,66 +2,33 @@ firefly: #namespace
     task_and_robot_environment_name: 'MBRL_transport-v2'
     ros_ws_abspath: "/home/wawa/catkin_meta"
 
-    test_model: 0
-    # 3d_space: 1
-    xy: 1
+    num: 2
     
-    #from handful_trials
-    #MPC
-    per: 1
-    prop_mode: "TSinf"
-    npart: 20
-    ign_var: False
-    opt_mode: "CEM"
-    plan_hor: 5
-    task_hor: 700 #200
-    num_nets: 1 #for ensemble models
-    epsilon: 0.001
-    alpha: 0.25 #0.25
-    epochs: 5 #5
-    max_iters: 3
-    popsize: 50 #50
-    num_elites: 10 #10
-    # model_in: 7  #sin(pitch),cos(pitch),x,y,z 2 actions
-    # model_out: 4  #x,y,z,pitch
-    model_3d_in: 18  #u1x,u1y,u1z,u2x,u2y,u2z,p1x,p1y,p1z,sin(roll),cos(roll),sin(pitch),cos(pitch),sin(yaw),cos(yaw) 3 actions
-    model_3d_out: 12  #u1x,u1y,u1z,u2x,u2y,u2z,p1x,p1y,p1z,roll,pitch,yaw
-
     #Experiment
-    ntrain_iters: 50 #50
-    nrollouts_per_iter: 5
-    ninit_rollouts: 5
-    nrecord: 0
-    neval: 1
-    route: "cross" #square,figure8_1 square_xy,cross
+    route: "square" #square,figure8_1 square_xy,cross,crowd1,crowd2, pointcloud
+    #for square and figure8_1, no need to load_traj_path
+    load_traj_path: "/home/wawa/catkin_meta/src/MBRL_transport/all_data/collision_predictor/corrective_path/crowd1/New_2d_save_corrective_waypoints_collision_crowd1_5_4.mat"
+    #square_xy  "/home/wawa/catkin_meta/src/MBRL_transport/all_data/collision_predictor/corrective_path/square/New_2d_save_corrective_waypoints_collision_square_2_5.mat"
+    #cross "/home/wawa/catkin_meta/src/MBRL_transport/all_data/collision_predictor/corrective_path/cross/New_2d_save_corrective_waypoints_collision_cross_2_5.mat"
+    #crowd1 "/home/wawa/catkin_meta/src/MBRL_transport/all_data/collision_predictor/corrective_path/crowd1/New_2d_save_corrective_waypoints_collision_crowd1_5_4.mat"
+    #crowd2 "/home/wawa/catkin_meta/src/MBRL_transport/all_data/collision_predictor/corrective_path/crowd2/New_2d_save_corrective_waypoints_collision_crowd2_5_0.mat"
     visualization: True
-    log_sample_data: 0 #whether we record states and models for one rollout; should be set to False when doing online learnining
+    #for collect pointcloud
+    save_pointcloud_path: "/home/wawa/catkin_meta/src/MBRL_transport/train_point_clouds/wind_x0.0_y0.0_2agents_L0.6"
+    save_pointcloud: False
 
-    #PETS
-    load_model_PETS: 1
+    plan_hor: 5
+    npart: 20
+    popsize: 50
 
-    #meta learning
-    epoch_m: 50000 # for offline training
-    epoch_m_running: 1000  #for online internal meta training
-    n_way: 4
-    k_spt: 15
-    k_qry: 15
-    task_num: 32
-    meta_lr: 0.001
-    update_lr: 0.001
-    update_step: 5
-    update_step_test: 10
-    load_model_m: 1 #careful it will automatically load previous model from the folder
-    abandon_samples: 0
-    meta_train_iters: 50
-    meta_nrollouts_per_iter: 4 # n way
-    running_total_points: 2000
+    work_space: # 3D cube in which Drone is allowed to move
+      x_max: 4.0
+      x_min: 0.0
+      y_max: 2
+      y_min: -2
+      z_max: 2.0
+      z_min: 0.0
 
-    #embedding
-    em_embedding: 0
-    VI: 0
-
-
-    
-
-    
+    max_roll: 1.57 # Max roll after which we end the episode
+    max_pitch: 1.57 # Max roll after which we end the episode
+    max_yaw: 3.14 # Max yaw, its 4 because its bigger the pi, its a complete turn actually the maximum

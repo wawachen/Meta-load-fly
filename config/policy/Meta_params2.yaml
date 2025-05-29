@@ -1,0 +1,40 @@
+mode: Meta
+exp_name: train_MAML
+is_eval: 0   
+
+# Firefly主参数配置
+mpc_params:
+  per: 1
+  prop_mode: "TSinf"
+  opt_mode: "CEM"
+  npart: 20
+  plan_hor: 5
+  num_nets: 1
+  epsilon: 0.001
+  alpha: 0.25
+  popsize: 50
+  max_iters: 3
+  num_elites: 10
+
+model_params:
+  load_model: True
+  load_model_path: /home/wawa/catkin_meta/src/MBRL_transport/checkpoints/Meta
+  model_in: 18
+  model_out: 12 
+  meta_lr: 0.001
+  update_lr: 0.001
+  update_step: 5
+  update_step_test: 10
+
+# Firefly训练相关参数配置
+exp_params:
+  seed: 222
+  task_hor: 700
+  log_sample_data: False
+  k_spt: 15
+  wind_condition_x: 0.0
+  wind_condition_y: 0.0
+  L: 0.6
+  
+
+

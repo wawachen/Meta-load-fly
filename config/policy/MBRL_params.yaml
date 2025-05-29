@@ -1,0 +1,39 @@
+mode: MBRL
+exp_name: train_MBRL   
+
+# Firefly主参数配置
+mpc_params:
+  num_nets: 1
+  per: 1
+  prop_mode: "TSinf"
+  opt_mode: "CEM"
+  npart: 20
+  plan_hor: 5
+  epsilon: 0.001
+  alpha: 0.25
+  popsize: 50
+  max_iters: 3
+  num_elites: 10
+
+model_params:
+  load_model: False
+  ensemble_size: 1
+  model_in: 18
+  model_out: 12
+  load_model_path: /home/wawa/catkin_meta/src/MBRL_transport/checkpoints/PETS_model_3d
+
+# Firefly训练相关参数配置
+exp_params:
+  is_eval: 0
+  ntrain_iters: 50
+  nrollouts_per_iter: 5
+  nrecord: 0
+  neval: 1
+  task_hor: 700
+  epochs: 5
+  log_sample_data: False
+  log_sample_path: 
+  seed: 200
+  wind_x: 0.0
+  wind_y: 0.0
+  L: 0.6

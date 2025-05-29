@@ -1,0 +1,75 @@
+mode: Meta
+exp_name: train_Meta_all_conditions
+is_eval: 1 
+
+# Firefly主参数配置
+mpc_params:
+  per: 1
+  prop_mode: "TSinf"
+  opt_mode: "CEM"
+  npart: 20
+  plan_hor: 5
+  num_nets: 1
+  epsilon: 0.001
+  alpha: 0.25
+  popsize: 50
+  max_iters: 3
+  num_elites: 10
+
+model_params:
+  load_model: True
+  load_model_path: /home/wawa/catkin_meta/src/MBRL_transport/checkpoints/Meta
+  model_in: 18
+  model_out: 12 
+  meta_lr: 0.001
+  update_lr: 0.001
+  update_step: 5
+  update_step_test: 10
+
+# Firefly训练相关参数配置
+exp_params:
+  seed: 222
+  train_iters: 1600
+  task_hor: 700
+  log_sample_data: False
+  k_spt: 15
+  evaluate_frequency: 20
+  wind_condition_x1: 0.0
+  wind_condition_y1: 0.0
+  wind_condition_x2: 1.0
+  wind_condition_y2: 0.0
+  wind_condition_x3: 0.6
+  wind_condition_y3: 0.0
+  L1: 0.6
+  L2: 0.8
+  L3: 1.4
+
+  #for evaluation
+  wind_condition_x: 0.0
+  wind_condition_y: 0.6
+  L: 0.6
+  
+  buffer_params:
+    batch_size: 2048
+    state_dim: 24
+    action_dim: 3
+  
+  ppo_model_params:
+    load_model_path: /home/wawa/catkin_meta/src/MBRL_transport/checkpoints/Meta_PPO
+    state_dim: 24
+    action_dim: 3
+    max_action: 0.1
+    batch_size: 2048
+    mini_batch_size: 64
+    lr_a: 3e-4
+    lr_c: 3e-4
+    gamma: 0.99
+    lamda: 0.95
+    epsilon: 0.2
+    K_epochs: 10
+    entropy_coef: 0.005
+    use_grad_clip: True
+    use_lr_decay: True
+    use_adv_norm: True
+
+

@@ -1,0 +1,29 @@
+mode: ppo
+exp_name: train_ppo
+is_eval: 1
+
+seed: 222
+checkpoint_path: 
+wind_condition_x: 0.0
+wind_condition_y: 0.0
+L: 0.6
+train_iters: 1200
+state_dim: 15
+action_dim: 3
+task_hor: 700
+max_action: 0.4
+batch_size: 2048
+mini_batch_size: 64
+lr_a: 3e-4
+lr_c: 3e-4
+gamma: 0.99
+lamda: 0.95
+epsilon: 0.2
+K_epochs: 10
+entropy_coef: 0.01
+use_grad_clip: True
+use_lr_decay: True
+use_adv_norm: True
+load_model_path: /home/wawa/catkin_meta/src/MBRL_transport/checkpoints/PPO
+log_sample_data: False  
+

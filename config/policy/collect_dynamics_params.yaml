@@ -1,0 +1,7 @@
+mode: dynamics
+exp_name: collect_dynamics
+wind_condition_x: 0.0
+wind_condition_y: 0.0
+L: 0.6
+save_path: /home/wawa/catkin_meta/src/MBRL_transport/all_data/dynamics1
+is_save: False

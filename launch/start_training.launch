@@ -2,6 +2,10 @@
 <launch>
     <!-- This version uses the openai_ros environments -->
     <rosparam command="load" file="$(find MBRL_transport)/config/MBRL_transport_params.yaml" />
+    
+    <arg name="config_file" default="MBRL_params.yaml" doc="配置文件名称" />
     <!-- Launch the training system -->
-    <node pkg="MBRL_transport" name="MBRL_transport" type="start_training.py" output="screen" />
+    <node pkg="MBRL_transport" name="MBRL_transport" type="start_training.py" output="screen">
+        <param name="config_file" value="$(arg config_file)" />
+    </node>
 </launch>

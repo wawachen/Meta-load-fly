@@ -1,0 +1,8 @@
+mode: dynamics_replay
+exp_name: replay_dynamics
+wind_condition_x: 0.0
+wind_condition_y: 0.0
+L: 0.6
+load_path: /home/wawa/catkin_meta/src/MBRL_transport/all_data/dynamics/firefly_data_3d_wind_x0.0_2agents_L0.6_dt_0.15.mat
+save_path: /home/wawa/catkin_meta/src/MBRL_transport/firefly_data_3d
+is_save: False

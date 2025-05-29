@@ -1,0 +1,29 @@
+mode: offline_Meta
+exp_name: train_offline_Meta
+is_eval: 1
+
+model_params:
+  load_model: False
+  load_model_path: /home/wawa/catkin_meta/src/MBRL_transport/checkpoints/Meta
+  model_in: 18
+  model_out: 12 
+  meta_lr: 0.001
+  update_lr: 0.001
+  update_step: 5
+  update_step_test: 10
+
+#train
+seed: 222
+meta_epoch: 50000
+meta_task_num: 32
+
+#dataset
+batch_num: 50
+path_length: 501
+n_way: 4
+k_spt: 15
+k_qry: 15
+
+
+
+
