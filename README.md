@@ -1,5 +1,5 @@
 # A meta-reinforcement learning method for adaptive payload transportation with variations
-[Jingyu Chen](https://www.researchgate.net/profile/Jingyu-Chen-20) <br>   
+[Jingyu Chen](https://www.researchgate.net/profile/Jingyu-Chen-20) <br>
 The University of Sheffield
 
 [Project website](https://sites.google.com/view/meta-payload-fly/) | [Paper](https://www.sciencedirect.com/science/article/pii/S0925231225007040?dgcid=author)
@@ -7,10 +7,14 @@ The University of Sheffield
 ## Overview of the Meta-load-fly
 ![](https://github.com/wawachen/Meta-load-fly/blob/main/image/method_icra(1).png)
 <p align="center">Overview of Meta-Load Fly with load trajectory tracking and path planning; A. Path planning B. Corrective policy</p>
-[![Video for payload tracking](https://youtu.be/SoPX2MGvyWQ "meta-load-fly")
+<table>
+  <tr>
+    <td><img src="https://github.com/wawachen/Meta-load-fly/blob/main/image/fly.gif" style="width: 100%;"></td>
+    <td><img src="https://github.com/wawachen/Meta-load-fly/blob/main/image/adaptive.gif" style="width: 100%;"></td>
+  </tr>
+</table>
 
-
-## Introduction 
+## 🚀 Introduction 
 ### Simulation environments
 In this work, we consider the obstacle-free scenarios for payload tracking and obstacle scenarios for full uav-payload system tracking.
 <div align=center><img src="https://github.com/wawachen/Meta-load-fly/blob/main/image/All_envs.png" width="60%"></div>
@@ -28,15 +32,13 @@ It has been tested in Ubuntu 20.04 Neotic. The code structure is shown below.
 **Openai_ros**: A bridge for connecting Gazebo with Pytorch. We also modify it here for building the task environment for transport. The basic movements of Firefly are defined here.<br>
 
 ## 🚀 Installation
-Firstly, create a ROS workspace (the tutorials can be found [here](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)). Create an empty package `MBRL_transport` and `cd MBRL_transport`. Then clone the repository `git clone xx`. For `all_data`, `CrazyS`, `mav_comm` , `gemotry_tf2-noeric-devel` and `openai_ros` ROS packages, download them from [download here](https://www.dropbox.com/scl/fo/dgz6au6wzdcy8ic11hj3n/AGTT0IKwSIKb_8HdGD10MpY?rlkey=kpl32nvalvu2ej39o5nyp198t&st=5mo2ugl8&dl=0). For `checkpoints`, download them from [download here](https://www.jianguoyun.com/p/DcgO-eQQ0Ou7DRi5w_sFIAA). Put all of them in the root folder of `MBRL_transport`.<br>
+Firstly, create a ROS workspace (the tutorials can be found [here](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)). Create an empty package `MBRL_transport` and `cd MBRL_transport`. Then clone the repository `git clone xx`. For `all_data`, `CrazyS`, `mav_comm` , `gemotry_tf2-noeric-devel` and `openai_ros` ROS packages, download them from [here](https://www.dropbox.com/scl/fo/dgz6au6wzdcy8ic11hj3n/AGTT0IKwSIKb_8HdGD10MpY?rlkey=kpl32nvalvu2ej39o5nyp198t&st=5mo2ugl8&dl=0). For `checkpoints`, download them from [here](https://www.jianguoyun.com/p/DcgO-eQQ0Ou7DRi5w_sFIAA). Put all of them in the root folder of `MBRL_transport`.<br>
 
 If you are using Ubuntu 18.04 Melodic ROS, the tricky thing is that we will use Python3 in Melodic ROS whose default Python is 2.7.
 Thus, when we import these packages into the Catkin workspace, we use the following command to indicate for ROS that we are using python3 not python2 for compiling files.
 
 ```
 catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3
-```
-
 ```
 If you are using Ubuntu 20.04 Neotic, as the default Python of Neotic is Python3, the Python 2 problem does not exist. Just install the following packages
 
@@ -102,14 +104,9 @@ Run `roslaunch MBRL_transport start_training.launch config_file:=offline_Meta_pa
 Run `roslaunch MBRL_transport start_training.launch config_file:=Meta_params.yaml` <br> 
 
 ### Baselines of the dynamics model
-For **probabilistic ensembles with trajectory sampling (PETS)**, run `roslaunch MBRL_transport start_training.launch config_file:=MBRL_params.yaml`
-***
-
-For **fast adaptation through meta-learning embedding (FAMLE)**, run `roslaunch MBRL_transport start_training.launch config_file:=FAMLE_params.yaml`
-***
-
+For **probabilistic ensembles with trajectory sampling (PETS)**, run `roslaunch MBRL_transport start_training.launch config_file:=MBRL_params.yaml`<br> 
+For **fast adaptation through meta-learning embedding (FAMLE)**, run `roslaunch MBRL_transport start_training.launch config_file:=FAMLE_params.yaml`<br> 
 For proximal policy optimisation (PPO),  run `roslaunch MBRL_transport start_training.launch config_file:=ppo_params.yaml` <br>
-
 
 ### 🏋️ Training of the collision predictor
 Assume we have got the data in `train_point_clouds` folder like this structure
@@ -133,7 +130,7 @@ Assume we have got the data in `train_point_clouds` folder like this structure
 ### 📊 Running RRT with the collision predictor
 This collision predictor is utilised to bias the tree-growth process of rapidly-exploring random tree (RRT) algorithm towards the goal points with a collision-free constraint.<br>
 
-In this paper, we consider four scenarios, the **cross path**, **square path**, **crowd1** and **crowd2**.<br>  
+In this paper, we consider four scenarios, the **cross path**, **square path**, **crowd1** and **crowd2**.<br>
 
 Firstly, we get the original full paths for different scenarios and tasks by changing `route_name` and `task_num` in `generate_route_points.py`. The original paths are named `save_waypoints_collision_cross_0.mat` or `save_waypoints_collision_square_0.mat`.<br>
 Then, we change the configuration in `RRT-svmrm.py` to generate collision-free paths.
@@ -143,9 +140,16 @@ rn = "square_c" #square_c,cross
 ```
 The path will be saved in `save_corrective_waypoints_collision_cross_0.mat` after the visualisation process. To validate the collision-free paths, change the `route` and `load_traj_path` of `MBRL_transport_params.yaml`. Run `roslaunch MBRL_transport start_training.launch config_file:=Meta_params3.yaml`. `load_traj_path` is the location of the collision-free path generated by our proposed path planner.
 
-### 📄 Citation
+## 📄 Citation
+@article{chen2025meta,
+  title={A meta-reinforcement learning method for adaptive payload transportation with variations},
+  author={Chen, Jingyu and Ma, Ruidong and Xu, Meng and Candan, Fethi and Mihaylova, Lyudmila and Oyekan, John},
+  journal={Neurocomputing},
+  volume={638},
+  pages={130032},
+  year={2025},
+  publisher={Elsevier}
+}
 
-
-
-### License
+## License
 This repository is released under the MIT license. See [LICENSE](https://github.com/wawachen/Meta-load-fly/blob/main/LICENSE) for additional details.
